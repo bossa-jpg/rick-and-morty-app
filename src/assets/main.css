@@ -1,0 +1,13 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0)
+}
+
+#app {
+    margin: 0 auto;
+    font-weight: normal;
+}

@@ -1,44 +1,45 @@
 <template>
-  <div class="hello">
-    <ul><li v-for="item in getResult" :key="item.id">{{ item.name }}</li></ul>
+  <div>
+      <input type="text"  v-model="search" placeholder="Search.." >
+      
+      <ul><li v-for="item in filteredEpisodes" :key="item.id">{{ item.name }}</li></ul>
   </div>
 </template>
 
 <script>
+
+const getAllEpisodes = (page) => {
+  return fetch("https://rickandmortyapi.com/api/episode" +( page ? '?page=' + page : ''))
+  .then(response => {
+    return response.json()
+  })
+}
 export default {
   name: 'EpisodesPage',
-  props: {
-    msg: String
-  },
   data() {
     return {
-      getResult: null
+      getResult: [],
+      search: ''
     }
   },
+  
   mounted() {
-    fetch("https://rickandmortyapi.com/api/episode")
-     .then(async response => {
-      const data = await response.json();
-      this.getResult = data.results
-    });
+    const pages = 3;
+    for(let i = 1; i < pages; i++){
+      getAllEpisodes(i).then(response => {
+        this.getResult = this.getResult.concat(response.results)
+      }).catch(error => console.error(error))
+    }
+  },
+  computed: {
+    filteredEpisodes: function() {
+      return this.getResult.filter((episode) => {
+        return episode.name.toLowerCase().match(this.search.toLowerCase())
+      }).sort((a,b) => a.id - b.id)
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-/* li {
-  display: inline-block;
-  margin: 0 10px;
-} */
-a {
-  color: #42b983;
-}
+<style>
 </style>
