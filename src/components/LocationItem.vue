@@ -1,6 +1,6 @@
 <template>
   <div className="location-info">
-    <RouterLink :to="'/location/' + item.id"
+    <RouterLink :to="'/api/location/' + item.id"
       ><h3>{{ item.name }}</h3></RouterLink
     >
     <p>

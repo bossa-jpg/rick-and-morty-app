@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <input type="text" v-model="search" placeholder="Search.." />
-    <ul v-for="(item, index) in filteredLocations" :key="item.id">
-      <LocationItem v-if="index < 30" :item="item" />
+    <ul v-for="(item) in filteredLocations" :key="item.id" >
+      <LocationItem :item="item" />
     </ul>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      getResult: [],
+      locations: [],
       search: "",
     };
   },
@@ -33,18 +33,20 @@ export default {
     for (let i = 1; i < pages; i++) {
       getLocations(i)
         .then((response) => {
-          this.getResult = this.getResult.concat(response.results);
+          this.locations = this.locations.concat(response.results);
         })
         .catch((error) => console.error(error));
     }
   },
   computed: {
     filteredLocations: function () {
-      return this.getResult
-        .filter((location) => {
-          return location.name.toLowerCase().match(this.search.toLowerCase());
-        })
-        .sort((a, b) => a.id - b.id);
+      return [...this.locations]
+        .sort((a, b) => a.id - b.id)
+        .filter((location, index) => {
+          if (location.name.toLowerCase().match(this.search.toLowerCase()) && index < 30)
+          return true;
+        }).filter((i, index) => index < 20)
+        ;
     },
   },
 };

@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      getResult: [],
+      episodes: [],
       search: "",
     };
   },
@@ -33,18 +33,20 @@ export default {
     for (let i = 1; i < pages; i++) {
       getAllEpisodes(i)
         .then((response) => {
-          this.getResult = this.getResult.concat(response.results);
+          this.episodes = this.episodes.concat(response.results);
         })
         .catch((error) => console.error(error));
     }
   },
   computed: {
     filteredEpisodes: function () {
-      return this.getResult
-        .filter((episode) => {
-          return episode.name.toLowerCase().match(this.search.toLowerCase());
-        })
-        .sort((a, b) => a.id - b.id);
+      return [...this.episodes]
+      .sort((a, b) => a.id - b.id)
+        .filter((episode, index) => {
+          if (episode.name.toLowerCase().match(this.search.toLowerCase()) && index <20)
+          return true;
+        }).filter((i, index) => index < 20)
+        ;
     },
   },
 };

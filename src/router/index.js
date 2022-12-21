@@ -22,17 +22,17 @@ const routes = [
     component: () => import("../views/LocationsView"),
   },
   {
-    path: "/episode/:id",
+    path: "/api/episode/:id",
     name: "Episode",
     component: () => import("../views/EpisodeView"),
   },
   {
-    path: "/character/:id",
+    path: "/api/character/:id",
     name: "Character",
     component: () => import("../views/CharacterView"),
   },
   {
-    path: "/location/:id",
+    path: "/api/location/:id",
     name: "Location",
     component: () => import("../views/LocationView"),
   },

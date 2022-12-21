@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      getResult: [],
+      characters: [],
       search: "",
     };
   },
@@ -32,18 +32,19 @@ export default {
     for (let i = 1; i < pages; i++) {
       getAllCharacters(i)
         .then((response) => {
-          this.getResult = this.getResult.concat(response.results);
+          this.characters = this.characters.concat(response.results);
         })
         .catch((error) => console.error(error));
     }
   },
   computed: {
     filteredCharacters: function () {
-      return this.getResult
+      return [...this.characters]
+        .sort((a, b) => a.id - b.id)
         .filter((character) => {
-          return character.name.toLowerCase().match(this.search.toLowerCase());
-        })
-        .sort((a, b) => a.id - b.id);
+            return character.name.toLowerCase().match(this.search.toLowerCase());
+        }).filter((i, index) => index < 20)
+        ;
     },
   },
 };
