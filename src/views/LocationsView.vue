@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <input type="text" v-model="search" placeholder="Search.." />
-    <ul v-for="(item) in filteredLocations" :key="item.id" >
+    <ul v-for="item in filteredLocations" :key="item.id">
       <LocationItem :item="item" />
     </ul>
   </div>
@@ -43,10 +43,13 @@ export default {
       return [...this.locations]
         .sort((a, b) => a.id - b.id)
         .filter((location, index) => {
-          if (location.name.toLowerCase().match(this.search.toLowerCase()) && index < 30)
-          return true;
-        }).filter((i, index) => index < 20)
-        ;
+          if (
+            location.name.toLowerCase().match(this.search.toLowerCase()) &&
+            index < 30
+          )
+            return true;
+        })
+        .filter((i, index) => index < 20);
     },
   },
 };

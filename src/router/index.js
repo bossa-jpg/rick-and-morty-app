@@ -2,37 +2,37 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/",
+    path: "/rick-and-morty-app/",
     name: "home",
     component: () => import("../views/HomeView"),
   },
   {
-    path: "/episodes",
+    path: "/rick-and-morty-app/episodes",
     name: "Episodes",
     component: () => import("../views/EpisodesView"),
   },
   {
-    path: "/characters",
+    path: "/rick-and-morty-app/characters",
     name: "Characters",
     component: () => import("../views/CharactersView"),
   },
   {
-    path: "/locations",
+    path: "/rick-and-morty-app/locations",
     name: "Locations",
     component: () => import("../views/LocationsView"),
   },
   {
-    path: "/api/episode/:id",
+    path: "/rick-and-morty-app/api/episode/:id",
     name: "Episode",
     component: () => import("../views/EpisodeView"),
   },
   {
-    path: "/api/character/:id",
+    path: "/rick-and-morty-app/api/character/:id",
     name: "Character",
     component: () => import("../views/CharacterView"),
   },
   {
-    path: "/api/location/:id",
+    path: "/rick-and-morty-app/api/location/:id",
     name: "Location",
     component: () => import("../views/LocationView"),
   },

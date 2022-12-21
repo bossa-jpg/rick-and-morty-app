@@ -42,9 +42,9 @@ export default {
       return [...this.characters]
         .sort((a, b) => a.id - b.id)
         .filter((character) => {
-            return character.name.toLowerCase().match(this.search.toLowerCase());
-        }).filter((i, index) => index < 20)
-        ;
+          return character.name.toLowerCase().match(this.search.toLowerCase());
+        })
+        .filter((i, index) => index < 20);
     },
   },
 };

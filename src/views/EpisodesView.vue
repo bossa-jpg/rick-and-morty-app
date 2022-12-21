@@ -41,12 +41,15 @@ export default {
   computed: {
     filteredEpisodes: function () {
       return [...this.episodes]
-      .sort((a, b) => a.id - b.id)
+        .sort((a, b) => a.id - b.id)
         .filter((episode, index) => {
-          if (episode.name.toLowerCase().match(this.search.toLowerCase()) && index <20)
-          return true;
-        }).filter((i, index) => index < 20)
-        ;
+          if (
+            episode.name.toLowerCase().match(this.search.toLowerCase()) &&
+            index < 20
+          )
+            return true;
+        })
+        .filter((i, index) => index < 20);
     },
   },
 };

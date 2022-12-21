@@ -1,17 +1,29 @@
 <template>
   <div>
     <h1>{{ characterInfo.name }}</h1>
-    <img :src="characterInfo.image" :alt="characterInfo.name">
-    <h3 className="info">{{ characterInfo.species + ', ' 
-    + characterInfo.gender + ', ' 
-    + characterInfo .status 
-    + ' from '}}<RouterLink className="link" :to="url(characterInfo.origin.url).pathname">{{ characterInfo.origin.name }}</RouterLink></h3>
+    <img :src="characterInfo.image" :alt="characterInfo.name" />
+    <h3 className="info">
+      {{
+        characterInfo.species +
+        ", " +
+        characterInfo.gender +
+        ", " +
+        characterInfo.status +
+        " from "
+      }}
+      <RouterLink
+        className="link"
+        :to="'/rick-and-morty-app' + url(characterInfo.origin.url).pathname"
+      >
+        {{ characterInfo.origin.name }}
+      </RouterLink>
+    </h3>
     <div className="info">
-       <ul v-for="item in filteredEpisodes" :key="item">
-        <RouterLink :to="url(item.url).pathname" >
-               <h3>{{ item.name }}</h3>
-               <p>{{ item.episode }}</p>
-            </RouterLink>
+      <ul v-for="item in filteredEpisodes" :key="item">
+        <RouterLink :to="'/rick-and-morty-app' + url(item.url).pathname">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.episode }}</p>
+        </RouterLink>
       </ul>
     </div>
   </div>
@@ -19,7 +31,8 @@
 <script>
 const getCharacter = async () => {
   return await fetch(
-    "https://rickandmortyapi.com" + window.location.pathname
+    // Добавила slice(19) чтобы вырезать /rick-and-morty-app - нужен для работы github-pages
+    "https://rickandmortyapi.com" + window.location.pathname.slice(19)
   ).then((response) => {
     return response.json();
   });
@@ -31,45 +44,43 @@ export default {
     return {
       characterInfo: [],
       episodesURL: [],
-      episodesInfo: []
+      episodesInfo: [],
     };
   },
   methods: {
-      url: (string) => {
-          return new URL(string)
-      },
-      getEpisode: async (url) => {
-        const response = await fetch(url);
-        const res = await response.json();
-        return res;
-      }
+    url: (string) => {
+      return new URL(string);
+    },
+    getEpisode: async (url) => {
+      const response = await fetch(url);
+      const res = await response.json();
+      return res;
+    },
   },
   created() {
     getCharacter().then((result) => {
       this.characterInfo = result;
-      this.episodesURL = result.episode
-      for (let i = 0; i < this.episodesURL.length; i++){
-              this.getEpisode(this.episodesURL[i]).then(
-              res => {
-                  this.episodesInfo.push(res)
-                  })
-              }
+      this.episodesURL = result.episode;
+      for (let i = 0; i < this.episodesURL.length; i++) {
+        this.getEpisode(this.episodesURL[i]).then((res) => {
+          this.episodesInfo.push(res);
+        });
+      }
     });
   },
   computed: {
-        filteredEpisodes: function() {
-            return [...this.episodesInfo]
-            .sort((a,b) => a.id - b.id);
-        }
-    }
+    filteredEpisodes: function () {
+      return [...this.episodesInfo].sort((a, b) => a.id - b.id);
+    },
+  },
 };
 </script>
 <style>
 .info {
-    text-align: left;
-    margin: 30px 10vw
+  text-align: left;
+  margin: 30px 10vw;
 }
 .link {
-    color: rgb(58, 157, 124);
+  color: rgb(58, 157, 124);
 }
 </style>
