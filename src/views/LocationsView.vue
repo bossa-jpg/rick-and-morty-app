@@ -1,14 +1,14 @@
 <template>
-    <div class="hello">
+    <div class="container">
         <input type="text"  v-model="search" placeholder="Search.." >
-
-        <ul>
-            <li v-for="item in filteredLocations" :key="item.id">{{ item.name }}</li>
+        <ul v-for="item, index in filteredLocations" :key="item.id">
+          <LocationItem v-if="index < 30" :item="item"/>
         </ul>
     </div>
 </template>
 
 <script>
+import LocationItem from "../components/LocationItem.vue"
 const getLocations = (page) => {
   return fetch("https://rickandmortyapi.com/api/location" +( page ? '?page=' + page : ''))
   .then(async response => {
@@ -18,8 +18,8 @@ const getLocations = (page) => {
 
 export default {
     name: 'LocationsPage',
-    props: {
-        msg: String
+    components: {
+      LocationItem
     },
     data() {
         return {
@@ -28,7 +28,7 @@ export default {
         }
     },
     mounted() {
-    const pages = 6;
+    const pages = 7;
     for(let i = 1; i < pages; i++){
       getLocations(i).then(response => {
         this.getResult = this.getResult.concat(response.results)
@@ -44,3 +44,14 @@ export default {
   }
 }
 </script>
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 20px 10vw;
+  width: 200px;
+}
+</style>

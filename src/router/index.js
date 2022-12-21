@@ -21,6 +21,21 @@ const routes = [
     name: "Locations",
     component: () => import("../views/LocationsView"),
   },
+  {
+    path: "/episode/:id",
+    name: "Episode",
+    component: () => import("../views/EpisodeView"),
+  },
+  {
+    path: "/character/:id",
+    name: "Character",
+    component: () => import("../views/CharacterView"),
+  },
+  {
+    path: "/location/:id",
+    name: "Location",
+    component: () => import("../views/LocationView"),
+  },
 ];
 
 const router = createRouter({

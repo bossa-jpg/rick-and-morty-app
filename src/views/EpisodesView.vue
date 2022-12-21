@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div className="container">
       <input type="text"  v-model="search" placeholder="Search.." >
-      
-      <ul><li v-for="item in filteredEpisodes" :key="item.id">{{ item.name }}</li></ul>
+      <ul v-for="item, index in filteredEpisodes" :key="item.id">
+        <EpisodeItem v-if="index < 30" :item="item" />
+      </ul>
   </div>
 </template>
 
 <script>
-
+import EpisodeItem from "../components/EpisodeItem.vue"
 const getAllEpisodes = (page) => {
   return fetch("https://rickandmortyapi.com/api/episode" +( page ? '?page=' + page : ''))
   .then(response => {
@@ -16,6 +17,9 @@ const getAllEpisodes = (page) => {
 }
 export default {
   name: 'EpisodesPage',
+  components: {
+    EpisodeItem
+  },
   data() {
     return {
       getResult: [],
@@ -42,4 +46,12 @@ export default {
 </script>
 
 <style>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+input {
+  margin: 20px 10vw;
+  width: 200px;
+}
 </style>

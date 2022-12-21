@@ -1,13 +1,14 @@
 <template>
-    <div class="hello">
-              <input type="text"  v-model="search" placeholder="Search.." >
-        <ul>
-            <li v-for="item in filteredCharacters" :key="item.id">{{ item.name }}</li>
+    <div class="container">
+        <input type="text"  v-model="search" placeholder="Search.." >
+        <ul v-for="item, index in filteredCharacters" :key="item.id">
+          <CharacterItem v-if="index < 30" :item="item" />
         </ul>
     </div>
 </template>
 
 <script>
+import CharacterItem from "../components/CharacterItem.vue"
 const getAllCharacters = (page) => {
   return fetch("https://rickandmortyapi.com/api/character" +( page ? '?page=' + page : ''))
   .then(async response => {
@@ -16,6 +17,9 @@ const getAllCharacters = (page) => {
 }
 export default {
     name: 'CharactersPage',
+    components: {
+      CharacterItem
+    },
     data() {
         return {
             getResult: [],
@@ -23,7 +27,7 @@ export default {
         }
     },
     mounted() {
-    const pages = 6
+    const pages = 42
     for(let i = 1; i < pages; i++){
       getAllCharacters(i).then(response => {
           this.getResult = this.getResult.concat(response.results)
@@ -39,3 +43,14 @@ export default {
   }
 }
 </script>
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 20px 10vw;
+  width: 200px;
+}
+</style>
