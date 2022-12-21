@@ -1,20 +1,19 @@
 <template>
-    <header>
-      <AppNavbar />
-    </header>
-    <router-view />
+  <header>
+    <AppNavbar />
+  </header>
+  <router-view />
 </template>
 
 <script>
-
-import AppNavbar from './components/AppNavbar.vue'
+import AppNavbar from "./components/AppNavbar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    AppNavbar
-  }
-}
+    AppNavbar,
+  },
+};
 </script>
 
 <style>

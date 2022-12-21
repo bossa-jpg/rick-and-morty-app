@@ -5,10 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prettier:check-all": "npx prettier --check .",
+    "prettier:write": "npx prettier --write ."
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "prettier": "^2.8.1",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6"
   },
