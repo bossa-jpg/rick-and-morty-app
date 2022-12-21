@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktest_app"]=self["webpackChunktest_app"]||[]).push([[178],{8178:function(e,t,n){n.r(t),n.d(t,{default:function(){return s}});var r=n(3396);function u(e,t,n,u,a,i){return(0,r.wg)(),(0,r.iD)("h1",null,"Welcome to the Rick and Morty wiki website")}var a={name:"HomeView"},i=n(89);const c=(0,i.Z)(a,[["render",u]]);var s=c}}]);
+//# sourceMappingURL=178.4a8e7693.js.map
