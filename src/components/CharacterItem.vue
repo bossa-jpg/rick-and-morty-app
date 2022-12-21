@@ -2,7 +2,7 @@
   <div className="character">
     <img width="110" :src="item.image" :alt="item.name" />
     <div className="character-info">
-      <RouterLink :to="'/rick-and-morty-app/api/character/' + item.id">
+      <RouterLink :to="'/api/character/' + item.id">
         <h3>{{ item.name }}</h3>
       </RouterLink>
       <p>{{ item.status }}<br />{{ item.species }}</p>

@@ -15,7 +15,7 @@
         v-for="item in filteredCharacters"
         :key="item"
       >
-        <RouterLink :to="'/rick-and-morty-app' + url(item.url).pathname">
+        <RouterLink :to="url(item.url).pathname">
           <img width="110" :src="item.image" :alt="item.name" />
           <h3>{{ item.name }}</h3>
         </RouterLink>
@@ -26,8 +26,7 @@
 <script>
 const getLocation = () => {
   return fetch(
-    // Добавила slice(19) чтобы вырезать /rick-and-morty-app - нужен для работы github-pages
-    "https://rickandmortyapi.com" + window.location.pathname.slice(19)
+    "https://rickandmortyapi.com" + window.location.pathname
   ).then((response) => {
     return response.json();
   });

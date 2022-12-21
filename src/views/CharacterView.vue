@@ -13,14 +13,14 @@
       }}
       <RouterLink
         className="link"
-        :to="'/rick-and-morty-app' + url(characterInfo.origin.url).pathname"
+        :to="url(characterInfo.origin.url).pathname"
       >
         {{ characterInfo.origin.name }}
       </RouterLink>
     </h3>
     <div className="info">
       <ul v-for="item in filteredEpisodes" :key="item">
-        <RouterLink :to="'/rick-and-morty-app' + url(item.url).pathname">
+        <RouterLink :to="url(item.url).pathname">
           <h3>{{ item.name }}</h3>
           <p>{{ item.episode }}</p>
         </RouterLink>
@@ -31,8 +31,7 @@
 <script>
 const getCharacter = async () => {
   return await fetch(
-    // Добавила slice(19) чтобы вырезать /rick-and-morty-app - нужен для работы github-pages
-    "https://rickandmortyapi.com" + window.location.pathname.slice(19)
+    "https://rickandmortyapi.com" + window.location.pathname
   ).then((response) => {
     return response.json();
   });

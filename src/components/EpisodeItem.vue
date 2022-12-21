@@ -1,6 +1,6 @@
 <template>
   <div className="episode-info">
-    <RouterLink :to="'/rick-and-morty-app/api/episode/' + item.id"
+    <RouterLink :to="'/api/episode/' + item.id"
       ><h3>{{ item.name }}</h3></RouterLink
     >
     <p>
